@@ -18,13 +18,13 @@ argOpts = Opts
         <> metavar "FILE"
         <> help "Log file" )
     <*> switch
-        ( long "showall"
+        ( long "all"
         <> short 'a'
-        <> help "Show all the addresses" )
+        <> help "Show all IP-addresses" )
     <*> option auto
         ( long "number"
         <> short 'n'
-        <> help "How many addresses to show"
+        <> help "Number of IP-addresses in the table"
         <> showDefault
         <> value 20
         <> metavar "INT" )
@@ -34,5 +34,6 @@ getOpts :: IO Opts
 getOpts = execParser opts
     where opts = info (argOpts <**> helper)
                       ( fullDesc
-                        <> progDesc "Parse standard security logs in CentOS"
-                        <> header "Print table with number of auth attempts for each IP-address" )
+                        <> progDesc ( "Print table with number of auth attempts for each " ++
+                                      "detected IP-address in the descending order" )
+                        <> header "Utility for parsing standard security logs in CentOS" )
